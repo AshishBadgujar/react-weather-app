@@ -68,7 +68,7 @@ const handleSearch=(e)=>{
         mapStyle="mapbox://styles/mapbox/light-v9"
         onViewportChange={(viewport) => setViewport(viewport)}
       >
-        <div className="shadow cardCont m-4" style={{
+        <div className="shadow cardCont m-3" style={{
           marginTop:30,
           maxWidth:"30rem"
         }}>

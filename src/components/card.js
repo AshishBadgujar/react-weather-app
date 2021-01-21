@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Card({info}) {
     return (
-            <div className="card shadow cardCont m-4 pb-1" style={{width:"18rem"}}>
+            <div className="card shadow cardCont m-3 pb-1" style={{width:"18rem"}}>
             <div className="card-body">
                 <h4 className="card-title">{info.name}</h4>
                 <img
