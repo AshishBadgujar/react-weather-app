@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactMapGL from 'react-map-gl'
 import Card from "./components/card";
+import { motion } from "framer-motion"
 
 function App() {
   const [city,setCity]=useState('')
@@ -13,8 +14,6 @@ function App() {
     icon: "loading..."
 })
 const [viewport,setViewport]=useState({
-  width: "100%",
-  height: "100vh",
   latitude: 19.0759899,
   longitude: 72.8773928,
   zoom: 1.3
@@ -39,13 +38,12 @@ const getWeather=(city)=>{
 }
 
 const handleSearch=(e)=>{
+  setisCard(false)
   e.preventDefault();
   fetch(`https://api.opencagedata.com/geocode/v1/json?q=${city}&key=${process.env.REACT_APP_API_GEO}`)
     .then(res=>res.json())
     .then(res2=>{
       setViewport({
-        width: "100vw",
-        height: "100vh",
         latitude: res2.results[0].geometry.lat,
         longitude: res2.results[0].geometry.lng,
         zoom: 10
@@ -57,20 +55,23 @@ const handleSearch=(e)=>{
   }
 
   return (
-    <div className="App">
+    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:1}} className="App">
      <ReactMapGL
-        width={viewport.width}
-        height={viewport.height}
-        latitude={viewport.latitude}
-        longitude={viewport.longitude}
-        zoom={viewport.zoom}
+        {...viewport}
+        width="100vw"
+        height="100vh"
         mapboxApiAccessToken={process.env.REACT_APP_ACCESS_TOKEN}
         mapStyle="mapbox://styles/mapbox/light-v9"
         onViewportChange={(viewport) => setViewport(viewport)}
       >
-        <div className="shadow cardCont m-3" style={{
-          marginTop:30,
-          maxWidth:"30rem"
+        <motion.div 
+        initial={{x:-300}}
+        animate={{x:0}}
+        transition={{delay:2,duration:0.7}}
+        className="shadow cardCont" style={{
+          padding:20,
+          maxWidth:300,
+          height:"100vh"
         }}>
             <h2>Search Weather</h2>
             <form action="" onSubmit={(e)=>handleSearch(e)}>
@@ -87,10 +88,10 @@ const handleSearch=(e)=>{
             className="btn shadow" 
             >Search</button>
             </form>
-        </div>
         {isCard &&<Card info={info}/>}
+        </motion.div>
       </ReactMapGL>
-    </div>
+    </motion.div>
   );
 }
 
