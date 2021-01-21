@@ -8,6 +8,7 @@ export default function Card({info}) {
                 <img
                     style={{width: 120,height: 120,}}
                     src={`https://openweathermap.org/img/w/${info.icon}.png`}
+                    alt="Image"
                     />
                 <h4 className="card-subtitle mb-2">{info.temp}&deg;</h4>
                 <h6 className="card-text">({info.desc})</h6>
