@@ -61,16 +61,16 @@ const handleSearch=(e)=>{
         width="100vw"
         height="100vh"
         mapboxApiAccessToken={process.env.REACT_APP_ACCESS_TOKEN}
-        mapStyle="mapbox://styles/mapbox/light-v9"
+        mapStyle="mapbox://styles/mapbox/streets-v11"
         onViewportChange={(viewport) => setViewport(viewport)}
       >
         <motion.div 
-        initial={{x:-300}}
+        initial={{x:-400}}
         animate={{x:0}}
         transition={{delay:2,duration:0.7}}
         className="shadow cardCont" style={{
           padding:20,
-          maxWidth:300,
+          maxWidth:400,
           height:"100vh"
         }}>
             <h2>Search Weather</h2>
